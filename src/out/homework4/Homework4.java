@@ -9,19 +9,40 @@ public class Homework4 {
         Data data = new Data();
         String sortedType = "М";
 
-        List<Individual> individualArray = returnSortedIndividualListWithType(data.individual, sortedType);
-        List<Entity> entityList = returnSortedEntity(data.entity);
+        List<Individual> individuals = sorting(data.clients, sortedType);
 
-
-        for (Client el: individualArray) {
-            System.out.println(el.toString());
-        }
-        System.out.println("----------------------");
-        for (Client el: entityList) {
+        for (Client el: individuals) {
             System.out.println(el.toString());
         }
     }
 
+    public static List<Individual> sorting(Client[] arr, String sortedType) {
+        List<Individual> list = new ArrayList<>();
+
+        for (Client element: arr) {
+            if (element instanceof Individual && ((Individual) element).getSex().equals(sortedType)) {
+                list.add((Individual) element);
+            }
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                if (list.get(i).getYear() > list.get(j).getYear()) {
+                    Individual client = list.get(i);
+                    list.set(i, list.get(j));
+                    list.set(j, client);
+                }
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Не требуется, так как задание изменилось.
+     * @param arr
+     * @return
+     */
     public static List<Entity> returnSortedEntity(Entity[] arr) {
         List<Entity> list = new ArrayList<>(Arrays.asList(arr));
 
@@ -47,6 +68,12 @@ public class Homework4 {
 
     }
 
+    /**
+     * Не требуется, так как задание изменилось.
+     * @param arr
+     * @param sortedType
+     * @return
+     */
     public static List<Individual> returnSortedIndividualListWithType(Individual[] arr, String sortedType) {
         List<Individual> list = new ArrayList<>();
         for (Individual el: arr) {
@@ -57,7 +84,7 @@ public class Homework4 {
 
         for (int i = 0; i < list.size(); i++) {
             for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getAge() > list.get(j).getAge()) {
+                if (list.get(i).getYear() > list.get(j).getYear()) {
                     Individual client = list.get(i);
                     list.set(i, list.get(j));
                     list.set(j, client);
