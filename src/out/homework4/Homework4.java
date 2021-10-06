@@ -7,6 +7,7 @@ import java.util.List;
 public class Homework4 {
     public static void main(String[] args) {
         Data data = new Data();
+        data.createClientsArray(20);
         String sortedType = "М";
 
         List<Individual> individuals = sorting(data.clients, sortedType);
