@@ -1,43 +1,62 @@
 package out.homework4;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
+import java.nio.charset.Charset;
 import java.util.Random;
 
-public class Data {
-    Client[] clients = {
-            new Entity(11, "ООО МОЯ ОБОРОНА", 1111111, 555555555),
-            new Individual(1, "Иванов Иван Иванович",  "М",  1993, new Random().nextInt()),
-            new Entity(12, "ОАО Петров Петр Петрович", new Random().nextInt(), new Random().nextLong()),
-            new Individual(5, "Бонд Джеймс Дванулясемь", "М", 1985, new Random().nextInt()),
-            new Entity(15, "ОО7 Бонд Джеймс Дванулясемь", new Random().nextInt(), new Random().nextLong()),
-            new Individual(2, "Петров Петр Петрович", "М", 1900, new Random().nextInt()),
-            new Individual(3, "Гага Леди Ивановна", "Ж", 1980, new Random().nextInt()),
-            new Entity(16, "ООО Диджей Смэш Яволна", new Random().nextInt(), new Random().nextLong()),
-            new Individual(4, "Сигал Стивен Владимирович", "М", 1960, new Random().nextInt()),
-            new Individual(6, "Диджей Смэш Яволна", "М", 1980, new Random().nextInt()),
-            new Entity(17, "ООО Баба Яга Костянаянога", new Random().nextInt(), new Random().nextLong()),
-            new Entity(18, "ООО Капитан Джек Воробей", new Random().nextInt(), new Random().nextLong()),
-            new Entity(11, "ООО МОЯ ОБОРОНА", 1111111, 555555555),
-            new Individual(7, "Баба Яга Костянаянога", "Ж", 999, new Random().nextInt()),
-            new Individual(8, "Кричащий Витас АААААААович", "М", 1999, new Random().nextInt()),
-            new Entity(20, "ООО Кричащий Витас АААААААович", new Random().nextInt(), new Random().nextLong()),
-            new Entity(13, "ООО Гага Леди Ивановна", new Random().nextInt(), new Random().nextLong()),
-            new Entity(14, "АО Сигал Стивен Владимирович", new Random().nextInt(), new Random().nextLong()),
-            new Individual(9, "Eminem Slim Shady", "М", 1983, new Random().nextInt()),
-            new Individual(10, "Tupac Amaru Shakur", "М", 1971, new Random().nextInt())
-    };
 
-    /**
-     * Не требуется, так как задание изменилось.
-     */
-    Entity[] entity = {new Entity(11, "ООО МОЯ ОБОРОНА", 1111111, 555555555),
-            new Entity(12, "ОАО Петров Петр Петрович", new Random().nextInt(), new Random().nextLong()),
-            new Entity(13, "ООО Гага Леди Ивановна", new Random().nextInt(), new Random().nextLong()),
-            new Entity(14, "АО Сигал Стивен Владимирович", new Random().nextInt(), new Random().nextLong()),
-            new Entity(15, "ОО7 Бонд Джеймс Дванулясемь", new Random().nextInt(), new Random().nextLong()),
-            new Entity(16, "ООО Диджей Смэш Яволна", new Random().nextInt(), new Random().nextLong()),
-            new Entity(17, "ООО Баба Яга Костянаянога", new Random().nextInt(), new Random().nextLong()),
-            new Entity(18, "ООО Капитан Джек Воробей", new Random().nextInt(), new Random().nextLong()),
-            new Entity(11, "ООО МОЯ ОБОРОНА", 1111111, 555555555),
-            new Entity(20, "ООО Кричащий Витас АААААААович", new Random().nextInt(), new Random().nextLong()),
-    };
+public class Data implements ClientsGenerator {
+    Client[] clients = null;
+
+    public void createClientsArray(int countClients) {
+        clients = new Client[countClients];
+
+        for (int i = 0; i < countClients; i++) {
+            clients[i] = generateClient(i);
+        }
+    }
+
+    @Override
+    public Client generateClient(int id) {
+        String name = null;
+        int inn = createInn();
+        if (id % 2 == 0) {
+            name = createName("entity");
+            long ogrn = createOgrn();
+            return new Entity(id, name, inn, ogrn);
+        } else {
+            name = createName("individual");
+            String sex = createSex();
+            int year = createYear();
+            return new Individual(id, name, sex, year, inn);
+        }
+    }
+
+    private String createName(String typeClient) {
+        if ("entity".equals(typeClient)) {
+            String[] type = new String[]{"ОАО", "ООО", "АО", "ИП"};
+            String name = RandomStringUtils.randomAlphabetic(15);
+            return String.format("%s %s", type[new Random().nextInt(type.length)], name);
+        } else {
+            return RandomStringUtils.randomAlphabetic(15);
+        }
+    }
+
+    private String createSex() {
+        String[] sex = new String[]{"М", "Ж"};
+        return sex[new Random().nextInt(1)];
+    }
+
+    private int createYear() {
+        return new Random().nextInt(2021);
+    }
+
+    private int createInn() {
+        return new Random().nextInt();
+    }
+
+    private long createOgrn() {
+        return new Random().nextLong();
+    }
 }
