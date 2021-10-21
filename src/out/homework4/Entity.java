@@ -4,22 +4,16 @@ import java.util.Objects;
 
 public class Entity extends Client{
     private String name;
-    private int inn;
     private long ogrn;
 
-    public Entity(int id, String name, int inn, long ogrn) {
-        this.id = id;
-        this.name = name;
-        this.inn = inn;
-        this.ogrn = ogrn;
+    public Entity(int id) {
+        super(id);
+        this.name = createName("entity");
+        this.ogrn = createOgrn();
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getInn() {
-        return inn;
     }
 
     public long getOgrn() {

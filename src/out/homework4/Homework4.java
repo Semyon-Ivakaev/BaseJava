@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Homework4 {
     public static void main(String[] args) {
-        Data data = new Data();
-        data.createClientsArray(20);
+        ClientsGenerator clientsGenerator = new ClientsGenerator();
+        Client[] clients = clientsGenerator.generateClientsArray(20);
         String sortedType = "М";
 
-        List<Individual> individuals = sorting(data.clients, sortedType);
+        List<Individual> individuals = sorting(clients, sortedType);
 
         for (Client el: individuals) {
             System.out.println(el.toString());

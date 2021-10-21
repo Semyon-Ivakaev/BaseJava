@@ -8,12 +8,11 @@ public class Individual extends Client{
     private String sex;
 
 
-    public Individual(int id, String fio, String sex, int year, int inn) {
-        this.id = id;
-        this.fio = fio;
-        this.year = year;
-        this.sex = sex;
-        this.inn = inn;
+    public Individual(int id) {
+        super(id);
+        this.fio = createName("individual");
+        this.year = createYear();
+        this.sex = createSex();
     }
 
     public String getFio() {
