@@ -1,15 +1,12 @@
 package out.homework4;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Homework4 {
     public static void main(String[] args) {
         ClientsGenerator clientsGenerator = new ClientsGenerator();
         Client[] clients = clientsGenerator.generateClientsArray(20);
         String sortedType = "М";
-
         List<Individual> individuals = sorting(clients, sortedType);
 
         for (Client el: individuals) {
