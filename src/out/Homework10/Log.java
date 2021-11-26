@@ -73,7 +73,11 @@ public class Log{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Log log = (Log) o;
-        return this.message.equals(log.message);
+        if (this.message.compareTo(log.message) == 0) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

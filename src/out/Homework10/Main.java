@@ -1,12 +1,12 @@
 package out.Homework10;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class Main {
     private static String pattern = "([\\d\\D]*)\\s\\W\\s([INFO\\sWARN\\sDEBUG]*)(.*|[[^]]+])\\s\\W\\s(.*$)";
@@ -22,8 +22,9 @@ public class Main {
         sortedType = br.readLine();
 
         Path file = Path.of("data");
-        Stream<Path> arr = Files.list(file);
-        arr.forEach((el) -> {
+        String[] fileTypes = {"txt", "log"};
+        Collection<File> allFiles = FileUtils.listFiles(new File(String.valueOf(file)), fileTypes,true);
+        allFiles.forEach((el) -> {
             try {
                 readFile(el);
             } catch (IOException e) {
@@ -32,16 +33,16 @@ public class Main {
         });
 
        for (Map.Entry<String, List<Log>> entry: allLogs.entrySet()) {
-           List<Log> logs = entry.getValue();
-           for (Log log : logs) {
-               if (log.getLevel().equals(sortedType)) {
-                   System.out.println(log.toString());
-               }
-           }
+            List<Log> logs = entry.getValue();
+            for (int i = 0; i < logs.size(); i++) {
+                if (logs.get(i).getLevel().equals(sortedType)) {
+                    System.out.println(logs.get(i).toString());
+                }
+            }
         }
     }
 
-    public static void readFile(Path path) throws IOException {
+    public static void readFile(File path) throws IOException {
         List<Log> logs = new ArrayList<>();
         File file = new File(String.valueOf(path));
         try (BufferedReader reader = new BufferedReader((new FileReader(file)))) {

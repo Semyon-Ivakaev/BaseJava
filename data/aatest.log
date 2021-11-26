@@ -1,0 +1,5 @@
+2015-07-29 19:23:20,173 - DEBUG  [SendWorker:188978561024:QuorumCnxManager$SendWorker@688] - Send worker leaving thread
+2015-07-29 19:23:20,278 - DEBUG  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@765] - Interrupting SendWorker
+2015-07-29 19:23:23,518 - DEBUG  [SendWorker:188978561024:QuorumCnxManager$SendWorker@679] - Interrupted while waiting for message on queue
+2015-07-29 19:23:26,760 - DEBUG  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@762] - Connection broken for id 188978561024, my id = 1, error =
+2015-07-29 19:23:26,979 - DEBUG  [RecvWorker:188978561024:QuorumCnxManager$RecvWorker@762] - Connection broken for id 188978561024, my id = 1, error =
