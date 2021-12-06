@@ -30,6 +30,7 @@ public class FileLogsThread extends Thread{
 
 
     public static void readFile(File path) throws IOException {
+        System.out.println("Start read file" + path.getName());
         List<Log> logs = new ArrayList<>();
         File file = new File(String.valueOf(path));
         try (BufferedReader reader = new BufferedReader((new FileReader(file)))) {
