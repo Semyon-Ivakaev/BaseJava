@@ -54,6 +54,10 @@ public class Main {
 
                 if (deleteStatus == 204) {
                     System.out.println(String.format("User with id=%d, delete success!", id));
+                } else if (deleteStatus < 200 || deleteStatus > 299){
+                    throw new Exception(String.format("Error delete user: %d", id));
+                } else {
+                    System.out.println("Request success, but request code != 204");
                 }
 
                 User user = new User();
